@@ -10,3 +10,12 @@
 
 # Allow git-related files
 !.git/
+
+# Explicitly exclude common junk inside MUTE/ (defensive, in case top-level * is ever removed)
+MUTE/**/__pycache__/
+MUTE/**/*.py[cod]
+MUTE/**/*.log
+MUTE/*.png
+MUTE/inference_log.txt
+MUTE/.vscode/
+MUTE/.idea/
