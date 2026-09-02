@@ -1,0 +1,59 @@
+/home/kushal/miniconda3/envs/edit-research/lib/python3.11/site-packages/diffusers/utils/deprecation_utils.py:23: FutureWarning: `torch_dtype` is deprecated and will be removed in version 1.0.0. Please use `dtype` instead.
+  deprecate("torch_dtype", "1.0.0", _TORCH_DTYPE_DEPRECATION_MESSAGE)
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading PixArt-alpha/PixArt-XL-2-512x512...
+Loading pipeline components...:   0%|          | 0/5 [00:00<?, ?it/s]Some weights of the model checkpoint at /home/kushal/.cache/huggingface/hub/models--PixArt-alpha--PixArt-XL-2-512x512/snapshots/50f702106901db6d0f8b67eb88e814c56ded2692/transformer were not used when initializing PixArtTransformer2DModel: 
+ ['caption_projection.y_embedding']
+Loading pipeline components...:  40%|████      | 2/5 [00:02<00:03,  1.06s/it]
+Loading weights:   0%|          | 0/219 [00:00<?, ?it/s][A
+Loading weights:   6%|▌         | 13/219 [00:00<00:01, 109.60it/s][A
+Loading weights:  11%|█         | 24/219 [00:00<00:03, 63.59it/s] [A
+Loading weights:  15%|█▍        | 32/219 [00:00<00:04, 41.69it/s][A
+Loading weights:  17%|█▋        | 38/219 [00:00<00:04, 43.98it/s][A
+Loading weights:  20%|██        | 44/219 [00:00<00:03, 44.16it/s][A
+Loading weights:  22%|██▏       | 49/219 [00:01<00:04, 35.99it/s][A
+Loading weights:  25%|██▍       | 54/219 [00:01<00:04, 36.84it/s][A
+Loading weights:  26%|██▋       | 58/219 [00:01<00:04, 36.93it/s][A
+Loading weights:  28%|██▊       | 62/219 [00:01<00:04, 37.59it/s][A
+Loading weights:  30%|███       | 66/219 [00:01<00:04, 37.77it/s][A
+Loading weights:  32%|███▏      | 71/219 [00:01<00:04, 36.43it/s][A
+Loading weights:  36%|███▌      | 79/219 [00:01<00:03, 40.38it/s][A
+Loading weights:  39%|███▉      | 85/219 [00:02<00:03, 41.02it/s][A
+Loading weights:  41%|████      | 90/219 [00:02<00:03, 41.26it/s][A
+Loading weights:  43%|████▎     | 95/219 [00:02<00:02, 41.43it/s][A
+Loading weights:  46%|████▌     | 100/219 [00:02<00:02, 42.03it/s][A
+Loading weights:  48%|████▊     | 105/219 [00:02<00:02, 43.23it/s][A
+Loading weights:  50%|█████     | 110/219 [00:02<00:03, 35.57it/s][A
+Loading weights:  53%|█████▎    | 115/219 [00:02<00:02, 35.43it/s][A
+Loading weights:  55%|█████▌    | 121/219 [00:02<00:02, 38.34it/s][A
+Loading weights:  59%|█████▉    | 129/219 [00:03<00:02, 40.73it/s][A
+Loading weights:  61%|██████    | 134/219 [00:03<00:02, 32.72it/s][A
+Loading weights:  65%|██████▌   | 143/219 [00:03<00:01, 40.25it/s][A
+Loading weights:  69%|██████▉   | 151/219 [00:08<00:15,  4.42it/s][A
+Loading weights:  71%|███████   | 155/219 [00:11<00:21,  2.94it/s][A
+Loading weights:  72%|███████▏  | 158/219 [00:11<00:17,  3.44it/s][A
+Loading weights:  78%|███████▊  | 170/219 [00:12<00:07,  6.48it/s][A
+Loading weights:  79%|███████▉  | 174/219 [00:12<00:05,  7.55it/s][A
+Loading weights:  81%|████████▏ | 178/219 [00:16<00:12,  3.33it/s][A
+Loading weights:  83%|████████▎ | 181/219 [00:21<00:23,  1.65it/s][A
+Loading weights:  87%|████████▋ | 191/219 [00:21<00:09,  3.07it/s][A
+Loading weights:  90%|████████▉ | 197/219 [00:22<00:05,  4.01it/s][A
+Loading weights:  92%|█████████▏| 201/219 [00:22<00:03,  4.94it/s][A
+Loading weights:  94%|█████████▎| 205/219 [00:22<00:02,  5.66it/s][A
+Loading weights:  95%|█████████▍| 208/219 [00:22<00:01,  6.58it/s][A
+Loading weights: 100%|██████████| 219/219 [00:23<00:00, 11.56it/s][ALoading weights: 100%|██████████| 219/219 [00:23<00:00,  9.47it/s]
+Loading pipeline components...:  80%|████████  | 4/5 [00:26<00:07,  7.46s/it]Loading pipeline components...: 100%|██████████| 5/5 [00:32<00:00,  7.12s/it]Loading pipeline components...: 100%|██████████| 5/5 [00:32<00:00,  6.46s/it]
+
+Setting `clean_caption=True` requires the Beautiful Soup library but it was not found in your environment. You can install it with pip:
+`pip install beautifulsoup4`. Please note that you may need to restart your runtime after installation.
+
+Setting `clean_caption` to False...
+
+Setting `clean_caption=True` requires the Beautiful Soup library but it was not found in your environment. You can install it with pip:
+`pip install beautifulsoup4`. Please note that you may need to restart your runtime after installation.
+
+Setting `clean_caption` to False...
+Enabling CPU offload...
+Attaching custom attention processor...
+Running inference...
+  0%|          | 0/10 [00:00<?, ?it/s]

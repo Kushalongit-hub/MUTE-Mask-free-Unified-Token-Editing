@@ -1,0 +1,12 @@
+# Ignore everything by default
+*
+
+# Allow the MUTE project folder
+!MUTE/
+!MUTE/**
+
+# Allow this gitignore itself
+!.gitignore
+
+# Allow git-related files
+!.git/
