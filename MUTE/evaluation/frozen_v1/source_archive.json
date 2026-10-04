@@ -1,0 +1,30 @@
+{
+  "purpose": "Portable copies of previously frozen source-only images and capture manifests; no new generation",
+  "source_masks_manifest_sha256": "ec3c4dc28a99e7fe67309ecb33baa20d577bd4e14cf72128704e7f1e08fd0358",
+  "files_sha256": {
+    "source_archive\\teapot_seed2027\\source.png": "1b3a8564f9b30cf019dce33ec01eb921c2830e61d837587b7bb60ef9037c1ad7",
+    "source_archive\\teapot_seed2027\\source_original.png": "1b3a8564f9b30cf019dce33ec01eb921c2830e61d837587b7bb60ef9037c1ad7",
+    "source_archive\\teapot_seed2027\\manifest.json": "0f2efb138c19fbe0673d2b8c5a3627424dd8350a0e0b9198c8e544112254c8b5",
+    "source_archive\\teapot_seed4099\\source.png": "3188ee38ac43d69cc698d14edb3f5dc045b317668552a32c5586dd80831f4402",
+    "source_archive\\teapot_seed4099\\source_original.png": "3188ee38ac43d69cc698d14edb3f5dc045b317668552a32c5586dd80831f4402",
+    "source_archive\\teapot_seed4099\\manifest.json": "1ed1ad0be0390aad6c055ea5f09a9be3908f7ea2f671cefd1f47c51518a3442c",
+    "source_archive\\toy_car_seed2027\\source.png": "b5080cb4edc16bb39e123a14012daa39969a999f83451a4ed6110bcc434c460d",
+    "source_archive\\toy_car_seed2027\\source_original.png": "b5080cb4edc16bb39e123a14012daa39969a999f83451a4ed6110bcc434c460d",
+    "source_archive\\toy_car_seed2027\\manifest.json": "e35d90097c81b19a4846b9588038821f0ce8c067176b2d2d60ba3523677b8b6f",
+    "source_archive\\toy_car_seed4099\\source.png": "74bfcf7b20b73f307b01f105bb9406185b9dbb53696286e886def1be8ea706a2",
+    "source_archive\\toy_car_seed4099\\source_original.png": "74bfcf7b20b73f307b01f105bb9406185b9dbb53696286e886def1be8ea706a2",
+    "source_archive\\toy_car_seed4099\\manifest.json": "f14dd6f2b48c34840c399bcef6143e3c0332a9525de68c5dba9c665453b0c1d0",
+    "source_archive\\backpack_seed2027\\source.png": "0cd47a0c80b78b10711568ba7270f075ff1504a7500c47487508dda7cabcfb0d",
+    "source_archive\\backpack_seed2027\\source_original.png": "0cd47a0c80b78b10711568ba7270f075ff1504a7500c47487508dda7cabcfb0d",
+    "source_archive\\backpack_seed2027\\manifest.json": "509c16aa8ee9f2bb0f615069f3f1e04bb3a4629049cd72dbad49a9253938a5bd",
+    "source_archive\\backpack_seed4099\\source.png": "628b256c49bd378d6a9672247ea6271790a595aa94fb799e87b7186450d813c3",
+    "source_archive\\backpack_seed4099\\source_original.png": "628b256c49bd378d6a9672247ea6271790a595aa94fb799e87b7186450d813c3",
+    "source_archive\\backpack_seed4099\\manifest.json": "8a59243aca7059e919f7bb85113580beff35600321a37c33de391224b82c5f32",
+    "source_archive\\vase_seed2027\\source.png": "ded10a28e4766bdeba922596688153fbf247d32880669a2a2536389084a73d17",
+    "source_archive\\vase_seed2027\\source_original.png": "ded10a28e4766bdeba922596688153fbf247d32880669a2a2536389084a73d17",
+    "source_archive\\vase_seed2027\\manifest.json": "948711b12c4e93ca94eb1c32232890b47029a6e7bdd45fc551db2b49d65bf330",
+    "source_archive\\vase_seed4099\\source.png": "03a95b5902ac6996ae2213f4140cb47a6e1267eb5c90eeec58132c34359f08c7",
+    "source_archive\\vase_seed4099\\source_original.png": "03a95b5902ac6996ae2213f4140cb47a6e1267eb5c90eeec58132c34359f08c7",
+    "source_archive\\vase_seed4099\\manifest.json": "2f6008f80bf65011c185dc948790871772e06a689f0d78fa14ae9af148239e09"
+  }
+}

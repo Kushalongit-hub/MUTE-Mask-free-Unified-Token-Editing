@@ -41,6 +41,19 @@ the code intentionally supports standard PixArt AttnProcessor2_0, not every mode
 
 ## Next milestones
 
+**Frozen screen v1:** `evaluation/frozen_v1/` contains four new prompt pairs and
+seeds 2027/4099, code/protocol hashes and source-only independent color-mask hashes.
+Fifteen tests pass. Five variants are measured jointly against frozen color,
+colored-region geometry and background criteria. Full silhouettes and independent
+blinded ratings are still needed for full-object and benchmark success claims.
+The screen is complete: 40 scored outputs, no execution failures, 24 exact capture
+checks, 32 exact ordinary/restoration identities, and 48 protected-latent checks.
+Expanded restoration and combined each pass only 2/8 automated joint gates, with
+visible part-structure failures among passes. Preserve v1 unchanged; any revised
+method uses these now-inspected cases as development and requires a fresh frozen
+test set. Prioritize same-object structure retention rather than claiming a
+directional gain from the existing background-restoration effect.
+
 **Coverage checkpoint:** `RESEARCH_STATUS_2026-10-04_COVERAGE.md` adds explicit
 mask margin/graded-ring ablations, with twelve passing tests. Margin 2 improves
 mug recoloring and boundaries; defaults stay unchanged. Next freeze independent
@@ -66,7 +79,7 @@ editing is not established. The next gate is successful semantic baseline edits
 and a controlled study of less disruptive intervention schedules.
 
 MUTE now has a fully isolated environment with Torch 2.14.0+cu130, Torchvision
-0.29.0+cu130, and twelve passing tests. Install a fresh Windows GPU environment with
+0.29.0+cu130, and fifteen passing tests. Install a fresh Windows GPU environment with
 `python -m venv .venv`, then use `.venv\Scripts\python.exe -m pip install -r
 MUTE\requirements_windows.lock.txt`. The historical initial environment note below
 describes the earlier checkpoint and is superseded by the isolated setup.

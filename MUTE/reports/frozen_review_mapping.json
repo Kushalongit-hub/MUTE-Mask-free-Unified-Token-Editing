@@ -1,0 +1,242 @@
+[
+  {
+    "review_id": "E001",
+    "case": "teapot",
+    "seed": 2027,
+    "variant": "directional"
+  },
+  {
+    "review_id": "E002",
+    "case": "teapot",
+    "seed": 2027,
+    "variant": "ordinary"
+  },
+  {
+    "review_id": "E003",
+    "case": "backpack",
+    "seed": 2027,
+    "variant": "ordinary"
+  },
+  {
+    "review_id": "E004",
+    "case": "toy_car",
+    "seed": 4099,
+    "variant": "ordinary"
+  },
+  {
+    "review_id": "E005",
+    "case": "vase",
+    "seed": 4099,
+    "variant": "restoration_m2"
+  },
+  {
+    "review_id": "E006",
+    "case": "backpack",
+    "seed": 4099,
+    "variant": "ordinary"
+  },
+  {
+    "review_id": "E007",
+    "case": "toy_car",
+    "seed": 4099,
+    "variant": "restoration_m2"
+  },
+  {
+    "review_id": "E008",
+    "case": "teapot",
+    "seed": 2027,
+    "variant": "restoration_m0"
+  },
+  {
+    "review_id": "E009",
+    "case": "teapot",
+    "seed": 2027,
+    "variant": "restoration_m2"
+  },
+  {
+    "review_id": "E010",
+    "case": "backpack",
+    "seed": 2027,
+    "variant": "restoration_m2"
+  },
+  {
+    "review_id": "E011",
+    "case": "backpack",
+    "seed": 2027,
+    "variant": "directional"
+  },
+  {
+    "review_id": "E012",
+    "case": "backpack",
+    "seed": 4099,
+    "variant": "directional"
+  },
+  {
+    "review_id": "E013",
+    "case": "backpack",
+    "seed": 2027,
+    "variant": "combined_m2"
+  },
+  {
+    "review_id": "E014",
+    "case": "backpack",
+    "seed": 2027,
+    "variant": "restoration_m0"
+  },
+  {
+    "review_id": "E015",
+    "case": "backpack",
+    "seed": 4099,
+    "variant": "restoration_m2"
+  },
+  {
+    "review_id": "E016",
+    "case": "teapot",
+    "seed": 4099,
+    "variant": "combined_m2"
+  },
+  {
+    "review_id": "E017",
+    "case": "vase",
+    "seed": 4099,
+    "variant": "combined_m2"
+  },
+  {
+    "review_id": "E018",
+    "case": "teapot",
+    "seed": 2027,
+    "variant": "combined_m2"
+  },
+  {
+    "review_id": "E019",
+    "case": "vase",
+    "seed": 2027,
+    "variant": "combined_m2"
+  },
+  {
+    "review_id": "E020",
+    "case": "backpack",
+    "seed": 4099,
+    "variant": "restoration_m0"
+  },
+  {
+    "review_id": "E021",
+    "case": "toy_car",
+    "seed": 4099,
+    "variant": "directional"
+  },
+  {
+    "review_id": "E022",
+    "case": "toy_car",
+    "seed": 2027,
+    "variant": "combined_m2"
+  },
+  {
+    "review_id": "E023",
+    "case": "vase",
+    "seed": 2027,
+    "variant": "restoration_m2"
+  },
+  {
+    "review_id": "E024",
+    "case": "vase",
+    "seed": 2027,
+    "variant": "directional"
+  },
+  {
+    "review_id": "E025",
+    "case": "teapot",
+    "seed": 4099,
+    "variant": "restoration_m0"
+  },
+  {
+    "review_id": "E026",
+    "case": "teapot",
+    "seed": 4099,
+    "variant": "directional"
+  },
+  {
+    "review_id": "E027",
+    "case": "vase",
+    "seed": 2027,
+    "variant": "restoration_m0"
+  },
+  {
+    "review_id": "E028",
+    "case": "toy_car",
+    "seed": 2027,
+    "variant": "restoration_m2"
+  },
+  {
+    "review_id": "E029",
+    "case": "toy_car",
+    "seed": 4099,
+    "variant": "combined_m2"
+  },
+  {
+    "review_id": "E030",
+    "case": "vase",
+    "seed": 4099,
+    "variant": "restoration_m0"
+  },
+  {
+    "review_id": "E031",
+    "case": "toy_car",
+    "seed": 2027,
+    "variant": "restoration_m0"
+  },
+  {
+    "review_id": "E032",
+    "case": "teapot",
+    "seed": 4099,
+    "variant": "restoration_m2"
+  },
+  {
+    "review_id": "E033",
+    "case": "teapot",
+    "seed": 4099,
+    "variant": "ordinary"
+  },
+  {
+    "review_id": "E034",
+    "case": "toy_car",
+    "seed": 4099,
+    "variant": "restoration_m0"
+  },
+  {
+    "review_id": "E035",
+    "case": "backpack",
+    "seed": 4099,
+    "variant": "combined_m2"
+  },
+  {
+    "review_id": "E036",
+    "case": "vase",
+    "seed": 4099,
+    "variant": "ordinary"
+  },
+  {
+    "review_id": "E037",
+    "case": "toy_car",
+    "seed": 2027,
+    "variant": "ordinary"
+  },
+  {
+    "review_id": "E038",
+    "case": "vase",
+    "seed": 2027,
+    "variant": "ordinary"
+  },
+  {
+    "review_id": "E039",
+    "case": "vase",
+    "seed": 4099,
+    "variant": "directional"
+  },
+  {
+    "review_id": "E040",
+    "case": "toy_car",
+    "seed": 2027,
+    "variant": "directional"
+  }
+]

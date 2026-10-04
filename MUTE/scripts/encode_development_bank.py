@@ -22,10 +22,15 @@ def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--model", default="checkpoints\\pixart512")
     p.add_argument("--output", type=Path, required=True)
+    p.add_argument("--protocol", type=Path, help="Use a frozen evaluation protocol's cases instead of development prompts")
     args = p.parse_args()
     args.output.mkdir(parents=True, exist_ok=False)
-    record = {"status": "encoding", "pairs": PAIRS, "model": args.model,
-              "scope": "Development prompt selection, not held-out evaluation"}
+    pairs = PAIRS
+    if args.protocol:
+        protocol = json.loads(args.protocol.read_text(encoding="utf-8"))
+        pairs = {case["id"]: (case["source"], case["target"], case["phrase"]) for case in protocol["cases"]}
+    record = {"status": "encoding", "pairs": pairs, "model": args.model,
+              "scope": "Frozen evaluation conditioning" if args.protocol else "Development prompt selection, not held-out evaluation"}
     manifest = args.output / "bank_manifest.json"
     manifest.write_text(json.dumps(record, indent=2), encoding="utf-8")
     begin = time.perf_counter()
@@ -33,7 +38,7 @@ def main():
         pipe = PixArtAlphaPipeline.from_pretrained(args.model, transformer=None, vae=None,
                 dtype=torch.bfloat16, variant="fp16", local_files_only=True)
         pipe.enable_sequential_cpu_offload()
-        prompts = list(dict.fromkeys([""] + [prompt for pair in PAIRS.values() for prompt in pair[:2]]))
+        prompts = list(dict.fromkeys([""] + [prompt for pair in pairs.values() for prompt in pair[:2]]))
         encodings = {}
         with torch.inference_mode():
             for prompt in prompts:
@@ -43,7 +48,7 @@ def main():
                     raise ValueError(f"Nonfinite encoding: {prompt}")
                 encodings[prompt] = (result[0].cpu(), result[1].cpu())
                 print("encoded", repr(prompt), flush=True)
-        for name, (source, target, phrase) in PAIRS.items():
+        for name, (source, target, phrase) in pairs.items():
             tensors = {}
             for i, prompt in enumerate([source, target]):
                 tensors[f"{i}.prompt_embeds"] = encodings[prompt][0].contiguous()

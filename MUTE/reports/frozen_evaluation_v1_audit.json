@@ -1,0 +1,85 @@
+{
+  "audited_utc": "2026-10-04T06:58:26.488476+00:00",
+  "cases": [
+    {
+      "case": "teapot",
+      "seed": 2027,
+      "capture_equal_checks": 3,
+      "ordinary_restoration_identity_checks": 4,
+      "protected_latent_checks": 6,
+      "source_and_ordinary_hash_equality_across_groups": true,
+      "frozen_code_hashes_match": true
+    },
+    {
+      "case": "teapot",
+      "seed": 4099,
+      "capture_equal_checks": 3,
+      "ordinary_restoration_identity_checks": 4,
+      "protected_latent_checks": 6,
+      "source_and_ordinary_hash_equality_across_groups": true,
+      "frozen_code_hashes_match": true
+    },
+    {
+      "case": "toy_car",
+      "seed": 2027,
+      "capture_equal_checks": 3,
+      "ordinary_restoration_identity_checks": 4,
+      "protected_latent_checks": 6,
+      "source_and_ordinary_hash_equality_across_groups": true,
+      "frozen_code_hashes_match": true
+    },
+    {
+      "case": "toy_car",
+      "seed": 4099,
+      "capture_equal_checks": 3,
+      "ordinary_restoration_identity_checks": 4,
+      "protected_latent_checks": 6,
+      "source_and_ordinary_hash_equality_across_groups": true,
+      "frozen_code_hashes_match": true
+    },
+    {
+      "case": "backpack",
+      "seed": 2027,
+      "capture_equal_checks": 3,
+      "ordinary_restoration_identity_checks": 4,
+      "protected_latent_checks": 6,
+      "source_and_ordinary_hash_equality_across_groups": true,
+      "frozen_code_hashes_match": true
+    },
+    {
+      "case": "backpack",
+      "seed": 4099,
+      "capture_equal_checks": 3,
+      "ordinary_restoration_identity_checks": 4,
+      "protected_latent_checks": 6,
+      "source_and_ordinary_hash_equality_across_groups": true,
+      "frozen_code_hashes_match": true
+    },
+    {
+      "case": "vase",
+      "seed": 2027,
+      "capture_equal_checks": 3,
+      "ordinary_restoration_identity_checks": 4,
+      "protected_latent_checks": 6,
+      "source_and_ordinary_hash_equality_across_groups": true,
+      "frozen_code_hashes_match": true
+    },
+    {
+      "case": "vase",
+      "seed": 4099,
+      "capture_equal_checks": 3,
+      "ordinary_restoration_identity_checks": 4,
+      "protected_latent_checks": 6,
+      "source_and_ordinary_hash_equality_across_groups": true,
+      "frozen_code_hashes_match": true
+    }
+  ],
+  "totals": {
+    "capture_checks": 24,
+    "exact_source_identities": 32,
+    "protected_latent_checks": 48,
+    "target_groups_complete": 16,
+    "metric_rows": 40
+  },
+  "independent_human_ratings": "pending"
+}

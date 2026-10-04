@@ -1,0 +1,24 @@
+{
+  "id": "mute_evaluation_v1",
+  "scope": "First frozen unseen prompt/seed screen; automated proxies, not an independently annotated benchmark",
+  "seeds": [2027, 4099],
+  "model": "checkpoints\\pixart512",
+  "model_revision": "50f702106901db6d0f8b67eb88e814c56ded2692",
+  "runtime": {"steps": 30, "guidance": 4.5, "threshold": 0.3, "dtype": "bfloat16", "capture_steps": [5,10,15], "capture_layers": [6,12,18,24]},
+  "variants": ["ordinary", "directional", "restoration_m0", "restoration_m2", "combined_m2"],
+  "directional": {"start": 15, "penalty": 2},
+  "restoration": {"start": 0, "end": 30, "feather": 0},
+  "mask_method": "Largest 4-connected source red HSV component, frozen from source only before target runs; independent of attention localization",
+  "hsv": {"minimum_saturation": 0.25, "minimum_value": 0.1, "red": [[0,0.06],[0.94,1]], "blue": [[0.52,0.72]], "green": [[0.20,0.46]]},
+  "source_validity": {"minimum_pixels": 256, "maximum_area_fraction": 0.6},
+  "geometry": "Target-color component with largest overlap with frozen source color mask; IoU, centroid distance and area ratio of colored regions, not full-object silhouettes",
+  "background": "RGB MAE outside frozen source-colored-region mask dilated by 8 pixels; same mask for every variant",
+  "proxy_thresholds": {"color_coverage_min": 0.8, "colored_region_iou_min": 0.7, "centroid_shift_max_px": 16, "background_mae_max": 0.03},
+  "missing_policy": "Keep every case and failed/missing run; invalid source masks do not receive a pass and are reported separately",
+  "cases": [
+    {"id":"teapot", "source":"a red ceramic teapot on a white kitchen counter against a plain gray wall", "target":"a blue ceramic teapot on a white kitchen counter against a plain gray wall", "phrase":"teapot", "target_color":"blue"},
+    {"id":"toy_car", "source":"a red toy car on gray concrete pavement in daylight", "target":"a green toy car on gray concrete pavement in daylight", "phrase":"toy car", "target_color":"green"},
+    {"id":"backpack", "source":"a red backpack on a beige wooden bench against a plain gray wall", "target":"a blue backpack on a beige wooden bench against a plain gray wall", "phrase":"backpack", "target_color":"blue"},
+    {"id":"vase", "source":"a red ceramic vase on a white pedestal against a plain gray wall", "target":"a green ceramic vase on a white pedestal against a plain gray wall", "phrase":"vase", "target_color":"green"}
+  ]
+}

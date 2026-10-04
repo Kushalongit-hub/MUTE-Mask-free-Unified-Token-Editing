@@ -37,6 +37,7 @@ def main():
     parser.add_argument("--revision", help="Pin an immutable model commit for research runs")
     parser.add_argument("--variant", default="fp16", help="Checkpoint weight variant")
     parser.add_argument("--verify-capture", action="store_true", help="Compare unwrapped and captured source pixels")
+    parser.add_argument("--source-only", action="store_true", help="Save source/localization before inspecting edited outputs")
     parser.add_argument("--local-files-only", action="store_true")
     parser.add_argument("--source", default="a red apple on a wooden table")
     parser.add_argument("--target", default="a green apple on a wooden table")
@@ -289,6 +290,10 @@ def main():
             "protected_patches": int((edit_weights == 0).sum()),
             "evaluation_mask": "Original undilated source localization, fixed across coverage settings",
             "interpolation": "nearest; Chebyshev patch dilation and graded outer rings"}
+        if args.source_only:
+            manifest.update(status="complete", phase="source_only")
+            save()
+            return
         images = [source]
         image_labels = ["source"]
         for mode in args.modes:

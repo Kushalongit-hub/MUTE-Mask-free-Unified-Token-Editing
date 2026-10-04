@@ -1,0 +1,94 @@
+{
+  "created_utc": "2026-10-04T06:37:42.827602+00:00",
+  "freeze_sha256": "59b0943581c1702b45fb4f95422e580a75ab79a5a4da9d897b01a8c7a4f99552",
+  "cases": [
+    {
+      "id": "teapot",
+      "seed": 2027,
+      "source_generation_complete": true,
+      "source": "runs\\evaluation_v1\\teapot_seed2027_source\\source.png",
+      "source_sha256": "1b3a8564f9b30cf019dce33ec01eb921c2830e61d837587b7bb60ef9037c1ad7",
+      "mask": "evaluation\\frozen_v1\\masks\\teapot_seed2027.png",
+      "mask_sha256": "736f1c06d10e2355c0a397e5a9cb6a5502698f4dec3cf0139d5090f86727ba4c",
+      "pixels": 29983,
+      "source_valid": true
+    },
+    {
+      "id": "teapot",
+      "seed": 4099,
+      "source_generation_complete": true,
+      "source": "runs\\evaluation_v1\\teapot_seed4099_source\\source.png",
+      "source_sha256": "3188ee38ac43d69cc698d14edb3f5dc045b317668552a32c5586dd80831f4402",
+      "mask": "evaluation\\frozen_v1\\masks\\teapot_seed4099.png",
+      "mask_sha256": "c4cffdbb518e174155adb55f16845886d9c1cecb4af65a6d959081602d52e713",
+      "pixels": 37823,
+      "source_valid": true
+    },
+    {
+      "id": "toy_car",
+      "seed": 2027,
+      "source_generation_complete": true,
+      "source": "runs\\evaluation_v1\\toy_car_seed2027_source\\source.png",
+      "source_sha256": "b5080cb4edc16bb39e123a14012daa39969a999f83451a4ed6110bcc434c460d",
+      "mask": "evaluation\\frozen_v1\\masks\\toy_car_seed2027.png",
+      "mask_sha256": "348ff2502f7381c7963fa23df0aae3b046ac182f1082f17821868154c26f3ba5",
+      "pixels": 11828,
+      "source_valid": true
+    },
+    {
+      "id": "toy_car",
+      "seed": 4099,
+      "source_generation_complete": true,
+      "source": "runs\\evaluation_v1\\toy_car_seed4099_source\\source.png",
+      "source_sha256": "74bfcf7b20b73f307b01f105bb9406185b9dbb53696286e886def1be8ea706a2",
+      "mask": "evaluation\\frozen_v1\\masks\\toy_car_seed4099.png",
+      "mask_sha256": "8321a5f762afffbacbb0779bc4ed1a1cd96f0a415ea24e4e44e645f4197e24c7",
+      "pixels": 20048,
+      "source_valid": true
+    },
+    {
+      "id": "backpack",
+      "seed": 2027,
+      "source_generation_complete": true,
+      "source": "runs\\evaluation_v1\\backpack_seed2027_source\\source.png",
+      "source_sha256": "0cd47a0c80b78b10711568ba7270f075ff1504a7500c47487508dda7cabcfb0d",
+      "mask": "evaluation\\frozen_v1\\masks\\backpack_seed2027.png",
+      "mask_sha256": "3f5a43cab44f89be5c5a28ae0271cc6e72157818162b1322c257297a7c8b44fd",
+      "pixels": 20151,
+      "source_valid": true
+    },
+    {
+      "id": "backpack",
+      "seed": 4099,
+      "source_generation_complete": true,
+      "source": "runs\\evaluation_v1\\backpack_seed4099_source\\source.png",
+      "source_sha256": "628b256c49bd378d6a9672247ea6271790a595aa94fb799e87b7186450d813c3",
+      "mask": "evaluation\\frozen_v1\\masks\\backpack_seed4099.png",
+      "mask_sha256": "12553f044db786fb325e200cd3d5be16b78229411766ceaae21b1a06ab6a4292",
+      "pixels": 29403,
+      "source_valid": true
+    },
+    {
+      "id": "vase",
+      "seed": 2027,
+      "source_generation_complete": true,
+      "source": "runs\\evaluation_v1\\vase_seed2027_source\\source.png",
+      "source_sha256": "ded10a28e4766bdeba922596688153fbf247d32880669a2a2536389084a73d17",
+      "mask": "evaluation\\frozen_v1\\masks\\vase_seed2027.png",
+      "mask_sha256": "95a9a7dca87a15e668cce2feceec800f140ad3469715e4326c20fe5aed25e21b",
+      "pixels": 30449,
+      "source_valid": true
+    },
+    {
+      "id": "vase",
+      "seed": 4099,
+      "source_generation_complete": true,
+      "source": "runs\\evaluation_v1\\vase_seed4099_source\\source.png",
+      "source_sha256": "03a95b5902ac6996ae2213f4140cb47a6e1267eb5c90eeec58132c34359f08c7",
+      "mask": "evaluation\\frozen_v1\\masks\\vase_seed4099.png",
+      "mask_sha256": "a31e84889a5f684764705638ed94c436be87003f6bc427b3333aad90e9851c96",
+      "pixels": 17673,
+      "source_valid": true
+    }
+  ]
+}

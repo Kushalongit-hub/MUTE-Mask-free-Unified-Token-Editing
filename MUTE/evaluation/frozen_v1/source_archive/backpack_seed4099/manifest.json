@@ -1,0 +1,252 @@
+{
+  "config": {
+    "model": "checkpoints\\pixart512",
+    "revision": null,
+    "variant": "fp16",
+    "verify_capture": true,
+    "source_only": true,
+    "local_files_only": true,
+    "source": "a red backpack on a beige wooden bench against a plain gray wall",
+    "target": "a blue backpack on a beige wooden bench against a plain gray wall",
+    "phrase": "backpack",
+    "seed": 4099,
+    "steps": 30,
+    "capture_steps": [
+      5,
+      10,
+      15
+    ],
+    "layers": [
+      6,
+      12,
+      18,
+      24
+    ],
+    "threshold": 0.3,
+    "guidance": 4.5,
+    "intervention_start": 15,
+    "intervention_end": null,
+    "penalty": 2.0,
+    "intervention_layers": null,
+    "identity_controls": true,
+    "restore_background": true,
+    "restoration_start": 0,
+    "restoration_end": null,
+    "mask_margin": 0,
+    "mask_feather": 0,
+    "modes": [
+      "none"
+    ],
+    "device": "cuda",
+    "dtype": "bfloat16",
+    "offload": true,
+    "conditioning_cache": "C:\\AIML\\Research\\MUTE-Mask-free-Unified-Token-Editing\\MUTE\\runs\\evaluation_v1\\conditioning\\backpack.safetensors",
+    "output": "C:\\AIML\\Research\\MUTE-Mask-free-Unified-Token-Editing\\MUTE\\runs\\evaluation_v1\\backpack_seed4099_source"
+  },
+  "status": "complete",
+  "python": "3.14.7",
+  "versions": {
+    "torch": "2.14.0+cu130",
+    "diffusers": "0.40.0",
+    "transformers": "5.18.0",
+    "accelerate": "1.15.0"
+  },
+  "input_type": "generated source; same initial noise; no real-image inversion",
+  "metrics_warning": "Background changes use inferred localization, not independent evaluation masks",
+  "runs": {
+    "source_original": {
+      "seconds": 6.103264899997157,
+      "sha256": "628b256c49bd378d6a9672247ea6271790a595aa94fb799e87b7186450d813c3",
+      "allocated_bytes": 1323585024,
+      "reserved_bytes": 1539309568
+    },
+    "source": {
+      "seconds": 5.838724399996863,
+      "sha256": "628b256c49bd378d6a9672247ea6271790a595aa94fb799e87b7186450d813c3",
+      "allocated_bytes": 1323585024,
+      "reserved_bytes": 1539309568
+    }
+  },
+  "code_sha256": {
+    "run.py": "0814869679544fa3a3ef69689f3dff01a7f5f48c1eb286d9cdb591243a975d07",
+    "attention.py": "7f09ed7a0070b0f63bc72d46a01473802c9cf0828e2334d4b5a643ff120d8e92",
+    "trajectory.py": "5035c735df433f7e2f10ff388e9b0a08ffa4137953eca3a1b5ad56bb68f04726"
+  },
+  "model_provenance": {
+    "model": "PixArt-alpha/PixArt-XL-2-512x512",
+    "revision": "50f702106901db6d0f8b67eb88e814c56ded2692",
+    "files": {
+      "model_index.json": {
+        "size": 452,
+        "sha256": "f6b39e79583fd99411c375f14f147a729a54c14de13446bd5055a2bd97758fc9"
+      },
+      "scheduler/scheduler_config.json": {
+        "size": 655,
+        "sha256": "ec1638ad7fce60b92870623ae6d9472ca4f005cdb2694b74cf86ae78e1d1e0d5"
+      },
+      "text_encoder/config.json": {
+        "size": 907,
+        "sha256": "d8be7dff041b002da571ae25d5db1d8befa52229f36dd1485fd4823405867c95"
+      },
+      "text_encoder/model.fp16-00001-of-00002.safetensors": {
+        "size": 4994582104,
+        "sha256": "4f2751ceeb2a96edd693e539dc5d6bba0b8d3814f49a9b3798403a0cec4b2e3d"
+      },
+      "text_encoder/model.fp16-00002-of-00002.safetensors": {
+        "size": 4530066248,
+        "sha256": "f63154532130422309532ff56f11945fbea8266c958e3133e8e5aef85c6293c7"
+      },
+      "text_encoder/model.safetensors.index.fp16.json": {
+        "size": 20980,
+        "sha256": "2d9e582d0e2be983581dbbfcfb6ad79e4acc58e9c700d4e855b3825fb3ad6e26"
+      },
+      "tokenizer/added_tokens.json": {
+        "size": 2593,
+        "sha256": "ea5a91a3234f66ea642c8e672d67f0f493759a9bee6910ae304ea9b9492118b5"
+      },
+      "tokenizer/special_tokens_map.json": {
+        "size": 2543,
+        "sha256": "7a1985a994c41886db38c719d2a3d2f40606663cc19d7c5d6a85d349320e06d2"
+      },
+      "tokenizer/spiece.model": {
+        "size": 791656,
+        "sha256": "d60acb128cf7b7f2536e8f38a5b18a05535c9e14c7a355904270e15b0945ea86"
+      },
+      "tokenizer/tokenizer_config.json": {
+        "size": 20489,
+        "sha256": "8bb1eeedbfe7bec47a052a5ae3dc5e29a6a02080e2bf42d4d8c9ea9f8e442c51"
+      },
+      "transformer/config.json": {
+        "size": 718,
+        "sha256": "237b803d57ace9c5a9f0df06c8f108c57e9f92b6c781b984728fc954d9fd9495"
+      },
+      "transformer/diffusion_pytorch_model.safetensors": {
+        "size": 2445458680,
+        "sha256": "13105448f416eb9d80206c0941cc48c1df4bd962ece461960a70866f62286ace"
+      },
+      "vae/config.json": {
+        "size": 759,
+        "sha256": "01b6999783749a4bc27c448dc23a235783c1fbb25721c4db609d4e1aa5d4442c"
+      },
+      "vae/diffusion_pytorch_model.fp16.safetensors": {
+        "size": 167335342,
+        "sha256": "7b7693298fa9d267155741d871b857c02d652e532248644236b714d6a9559dfd"
+      }
+    }
+  },
+  "model_load_seconds": 1.149122399998305,
+  "gpu": "NVIDIA GeForce RTX 5060 Laptop GPU",
+  "token_indices": [
+    3
+  ],
+  "trajectory": {
+    "steps": 30,
+    "timesteps": [
+      999.0,
+      966.0,
+      932.0,
+      899.0,
+      866.0,
+      832.0,
+      799.0,
+      766.0,
+      733.0,
+      699.0,
+      666.0,
+      633.0,
+      599.0,
+      566.0,
+      533.0,
+      499.0,
+      466.0,
+      433.0,
+      400.0,
+      366.0,
+      333.0,
+      300.0,
+      266.0,
+      233.0,
+      200.0,
+      166.0,
+      133.0,
+      100.0,
+      67.0,
+      33.0
+    ],
+    "shape": [
+      1,
+      4,
+      64,
+      64
+    ],
+    "sha256": "04ff133f2021c02b7092f72b02d1a1806740956005d2765260c30a6e3abaf6fe",
+    "method": "post-scheduler background latent replacement; target solver history retained"
+  },
+  "capture_verification": {
+    "pixels_equal": true,
+    "max_pixel_difference": 0,
+    "mean_pixel_difference": 0.0
+  },
+  "localization": {
+    "active_patches": 159,
+    "patches": 1024,
+    "captures": [
+      {
+        "layer": 6,
+        "step": 5
+      },
+      {
+        "layer": 12,
+        "step": 5
+      },
+      {
+        "layer": 18,
+        "step": 5
+      },
+      {
+        "layer": 24,
+        "step": 5
+      },
+      {
+        "layer": 6,
+        "step": 10
+      },
+      {
+        "layer": 12,
+        "step": 10
+      },
+      {
+        "layer": 18,
+        "step": 10
+      },
+      {
+        "layer": 24,
+        "step": 10
+      },
+      {
+        "layer": 6,
+        "step": 15
+      },
+      {
+        "layer": 12,
+        "step": 15
+      },
+      {
+        "layer": 18,
+        "step": 15
+      },
+      {
+        "layer": 24,
+        "step": 15
+      }
+    ]
+  },
+  "restoration_mask": {
+    "full_edit_patches": 159,
+    "graded_ring_patches": 0,
+    "protected_patches": 865,
+    "evaluation_mask": "Original undilated source localization, fixed across coverage settings",
+    "interpolation": "nearest; Chebyshev patch dilation and graded outer rings"
+  },
+  "phase": "source_only"
+}
