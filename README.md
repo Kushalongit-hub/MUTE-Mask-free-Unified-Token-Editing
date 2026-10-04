@@ -4,12 +4,15 @@ MUTE is an experimental inference-time editing pipeline built on **PixArt-alpha/
 
 **Current finding:** source-trajectory restoration improves background preservation. Reliable whole-object recoloring and structure retention remain unresolved. Directional attention has not demonstrated a clear additional benefit over restoration alone. Novelty has not been established through a completed prior-method audit.
 
+This root README is the canonical research guide; update it here rather than creating a duplicate in `MUTE/`.
+
 This guide documents the controlled implementation and completed frozen evaluation as of **5 October 2026**. Earlier standalone scripts remain historical prototypes.
 
 ## Contents
 
 - [Research question and scope](#research-question-and-scope)
 - [How MUTE works](#how-mute-works)
+- [Architecture diagrams](#architecture-diagrams)
 - [Methods and controls](#methods-and-controls)
 - [Repository map](#repository-map)
 - [Environment and installation](#environment-and-installation)
@@ -101,6 +104,170 @@ Restoration occurs **after the scheduler step**. The target solver retains its o
 
 The runner saves images, localization, restoration weights, configuration, provenance, hashes, and applicable trajectory/identity checks. Errors become failed manifests. Evaluation measures recoloring, colored-region geometry, and background preservation together.
 
+## Architecture diagrams
+
+These diagrams describe the implemented inference pipeline. Solid arrows show data or control dependencies; dashed arrows identify optional paths or measurement checks. Source and target passes run sequentially and reuse the same pretrained model. They are not two separately trained networks.
+
+### End-to-end source and target architecture
+
+```mermaid
+flowchart TB
+    SP["Source prompt"] --> ENC["T5 tokenizer and text encoder<br/>or compatible conditioning cache"]
+    TP["Target prompt"] --> ENC
+    PH["Object phrase"] --> TOK["Match phrase subword indices"]
+    SEED["Seed and initial noise"] --> SRC
+    SEED --> TGT
+
+    subgraph SOURCE["Source pass: original PixArt computation"]
+        SRC["Source-conditioned denoising"] --> CAP["Capture selected cross-attention<br/>while delegating forward computation"]
+        SRC --> STR["Source scheduler steps"]
+        STR --> TRAJ["Record post-step source latents<br/>and timesteps on CPU"]
+        STR --> SD["VAE decode"]
+        SD --> SI["Source image"]
+    end
+
+    ENC -->|Source embeddings| SRC
+    TOK --> CAP
+    CAP --> MAP["Positive CFG branch<br/>sum phrase tokens and average heads<br/>average selected layers and calls"]
+    MAP --> MASK["Normalize and threshold<br/>fixed active-patch mask"]
+    MASK --> BIAS["Scheduled self-attention bias<br/>original active mask"]
+    MASK --> WEIGHT["Optional dilation and feathering<br/>restoration edit weights"]
+
+    subgraph TARGET["Target pass: same seeded noise, changed conditioning"]
+        TGT["Target-conditioned PixArt<br/>original cross-attention"] --> TS["Target scheduler step"]
+        TS --> REST["Optional post-step source restoration"]
+        REST --> NEXT["Next denoising call<br/>or final VAE decode"]
+        NEXT --> OUT["Edited image"]
+    end
+
+    ENC -->|Target embeddings| TGT
+    BIAS --> TGT
+    WEIGHT -.-> REST
+    TRAJ -.->|Matching source step| REST
+    SI --> RECORD["Images, controls, hashes<br/>configuration and manifest"]
+    OUT --> RECORD
+```
+
+Attention localization and source latents serve different roles: localization defines where intervention is allowed, while the trajectory supplies the source values for protected regions. Expanding restoration coverage does not expand the directional-attention mask.
+
+### Inside the attention processors
+
+```mermaid
+flowchart TB
+    subgraph CROSS["Source cross-attention capture"]
+        H["Image-patch hidden states"] --> Q["Image queries Q"]
+        C["Source text embeddings"] --> K["Text keys K"]
+        Q --> SCORE["Float32 QK transpose / sqrt head dimension<br/>apply text padding mask"]
+        K --> SCORE
+        SCORE --> PROB["Softmax over text tokens<br/>select positive CFG branch"]
+        PROB --> AGG["Sum matched phrase tokens<br/>average heads, selected layers and calls"]
+        AGG --> A["Normalized heat map<br/>active patches A, background B"]
+        H --> ORIGINAL["Installed cross-attention processor<br/>computes the actual forward output"]
+        C --> ORIGINAL
+    end
+
+    subgraph SELF["Target self-attention intervention"]
+        STEP["Layer and zero-based call index"] --> GATE{"Selected layer and<br/>inside intervention interval?"}
+        GATE -->|No| PASS["Delegate without new bias"]
+        GATE -->|Yes| BLOCK["Build query-row / key-column bias<br/>directional: background rows, active columns"]
+        BLOCK --> COMB["Add existing attention mask<br/>and delegate to installed processor"]
+    end
+
+    A --> BLOCK
+```
+
+The capture branch observes source attention but does not substitute its reconstructed probabilities for the model's forward output. Target intervention modifies self-attention bias; it does not replace target text conditioning or target cross-attention with source text.
+
+For self-attention, rows are **query destinations** and columns are **key/value sources**. An arrow below means that the destination query can read the source region:
+
+```mermaid
+flowchart LR
+    AK["Active-region keys and values"] -->|Allowed| AQ["Active-region queries"]
+    BK["Background keys and values"] -->|Allowed| AQ
+    BK -->|Allowed| BQ["Background queries"]
+    AK -->|Penalized in directional mode| BQ
+```
+
+The bias added to self-attention logits is `-penalty` for background-query/active-key pairs and zero elsewhere. Penalty 2 suppresses those pairs without removing them; infinity blocks them. Symmetric mode also penalizes active-query/background-key pairs, while reverse mode penalizes only that opposite direction. Directional blocking is an information-flow hypothesis, not a guarantee of preserved background pixels.
+
+### Per-step trajectory restoration and solver state
+
+```mermaid
+sequenceDiagram
+    participant S as Source denoising pass
+    participant CPU as CPU source trajectory
+    participant T as Target denoising pass
+    participant Solver as Target scheduler
+    participant R as Restoration callback
+    participant VAE as VAE decoder
+
+    loop Source calls i = 0 through N-1
+        S->>S: Predict with source conditioning and take scheduler step
+        S->>CPU: Store cloned post-step latent and timestep
+    end
+    Note over S,T: Target restarts from the same seeded initial noise
+    loop Target calls i = 0 through N-1
+        T->>T: Predict with target conditioning and scheduled attention bias
+        T->>Solver: Model prediction and current target latent
+        Solver-->>T: Post-step target latent
+        Note over Solver: Target model-output history remains its own
+        T->>R: Callback with call index, timestep, and latent
+        R->>CPU: Retrieve matching source latent
+        CPU-->>R: Source reference
+        R->>R: Validate step, timestep, and shape
+        R-->>T: Keep target core, blend ring, copy protected source
+    end
+    T->>VAE: Final restored latent
+    VAE-->>T: Edited pixels
+```
+
+The callback changes the latent used by the next target call. It does not replace the target scheduler's internal history with source history. Exact equality checks apply to protected latent positions; decoding can still alter nearby pixels.
+
+### Restoration coverage construction
+
+```mermaid
+flowchart LR
+    A["Original active patches<br/>attention-derived boolean mask"] --> CORE["Chebyshev dilation<br/>radius = mask-margin"]
+    CORE --> ONE["Editable core<br/>weight = 1"]
+    CORE --> RINGS["Optional outer rings<br/>width = mask-feather"]
+    RINGS --> FRACTION["Ring at distance d<br/>weight = 1 - d / (feather + 1)"]
+    CORE --> ZERO["Outside core and rings<br/>weight = 0"]
+    ONE --> GRID["Combine patch weights<br/>nearest-neighbor resize to latent grid"]
+    FRACTION --> GRID
+    ZERO --> GRID
+    GRID --> BLEND["source + weight * target-minus-source<br/>exact source/target endpoint selection"]
+    A --> ATTN["Directional attention continues<br/>to use the original mask"]
+```
+
+The ring formula means `1 - d / (feather + 1)`. For one feather ring, its weight is 0.5. Larger margins improve editable coverage but expose more of the scene to target drift; feathering blends values rather than guaranteeing a clean semantic boundary.
+
+### Frozen evaluation architecture and data separation
+
+```mermaid
+flowchart TB
+    FREEZE["Hash protocol, code, encoder<br/>and environment lock"] --> SOURCES["Generate eight source-only cases"]
+    SOURCES --> REVIEW["Inspect sources only<br/>record mask limitations"]
+    REVIEW --> EM["Freeze largest source red component<br/>independent evaluation mask"]
+    SOURCES --> AM["Attention-derived intervention mask"]
+    AM --> GEN["Fixed five-variant target generation<br/>same seed and conditioning within each case"]
+    EM --> GENREADY["Evaluation references locked<br/>before targets are inspected"]
+    GENREADY --> GEN
+    GEN --> OUTPUT["40 scored target outputs<br/>retain failures and missing cases"]
+    OUTPUT --> COLOR["Target hue classification<br/>coverage and overlap-selected component"]
+    EM --> COLOR
+    COLOR --> GEO["Colored-region IoU<br/>centroid shift and area ratio"]
+    OUTPUT --> BG["Background RGB MAE"]
+    EM -->|Fixed 8-pixel dilation| BG
+    COLOR --> JOINT["Joint proxy gates<br/>color, IoU, centroid, background"]
+    GEO --> JOINT
+    BG --> JOINT
+    OUTPUT --> HUMAN["Method-hidden paired review packet<br/>independent ratings pending"]
+    JOINT --> REPORT["Per-case scores, medians<br/>contact sheets and limitations"]
+    HUMAN -.->|Separate evidence when completed| REPORT
+```
+
+The evaluation mask measures outputs; it does not supply the editing region. Source-only mask review precedes target inspection. Automated color-region gates and independent whole-object review are distinct evidence: proxy passes can still contain broken handles or changed designs.
+
 ## Methods and controls
 
 | Variant | Attention behavior | Restoration | Purpose |
@@ -120,6 +287,7 @@ Frozen v1 compares ordinary, directional, original-mask restoration, margin-two 
 
 ```text
 Repository root/
+├── README.md                      Canonical research documentation
 ├── .venv/                         Isolated local environment
 └── MUTE/                          Working directory for experiment commands
     ├── mute/
@@ -133,8 +301,7 @@ Repository root/
     ├── reports/                   Curated scores and visual comparisons
     ├── checkpoints/               Large local model files; ignored
     ├── runs/                      Raw outputs, caches, and logs; ignored
-    ├── requirements*.txt          Dependencies and recorded Windows lock
-    └── README.md
+    └── requirements*.txt          Dependencies and recorded Windows lock
 ```
 
 | Script | Role |
@@ -173,7 +340,7 @@ The environment does not inherit host site packages. These are recorded experime
 
 ### Create the isolated environment
 
-From the repository root, one directory above this README:
+From the repository root, where this README lives:
 
 ```powershell
 python -m venv .venv
@@ -330,7 +497,7 @@ Eight cases combine four objects with seeds **2027** and **4099**:
 | Backpack | Red backpack, beige wooden bench, plain gray wall | Red → blue |
 | Vase | Red ceramic vase, white pedestal, plain gray wall | Red → green |
 
-Exact prompts are in [protocol.json](evaluation/frozen_v1/protocol.json). Settings are 512-pixel generation, 30 steps, guidance 4.5, bfloat16 runtime, threshold 0.3, capture calls 5/10/15, and layers 6/12/18/24. Directional intervention starts at call 15 with penalty 2. Restoration runs for all 30 steps with no feathering.
+Exact prompts are in [protocol.json](MUTE/evaluation/frozen_v1/protocol.json). Settings are 512-pixel generation, 30 steps, guidance 4.5, bfloat16 runtime, threshold 0.3, capture calls 5/10/15, and layers 6/12/18/24. Directional intervention starts at call 15 with penalty 2. Restoration runs for all 30 steps with no feathering.
 
 Five scored variants produce **40 target rows**. Source generations, identity controls, and duplicated baselines are additional audit artifacts rather than additional independent cases.
 
@@ -395,13 +562,13 @@ Margin-two restoration and combined methods pass proxies for teapot 4099 and bac
 
 Other observed failures include changed vehicle geometry/wheels, extra small cars, partial recoloring, deformed teapot parts, brown rather than blue backpack output, jagged boundaries, and removed vase flowers. Small background MAE can coexist with a meaningful scene-content failure.
 
-[Visual observations](evaluation/frozen_v1/VISUAL_OBSERVATIONS.md) were written by the implementing assistant and are **not independent ratings**. Forty paired review images and a blank ratings sheet are prepared; independent review is pending.
+[Visual observations](MUTE/evaluation/frozen_v1/VISUAL_OBSERVATIONS.md) were written by the implementing assistant and are **not independent ratings**. Forty paired review images and a blank ratings sheet are prepared; independent review is pending.
 
-See the [full report](reports/FROZEN_EVALUATION_V1.md), [per-case CSV](reports/frozen_evaluation_v1.csv), [machine-readable results](reports/frozen_evaluation_v1.json), and [audit record](reports/frozen_evaluation_v1_audit.json).
+See the [full report](MUTE/reports/FROZEN_EVALUATION_V1.md), [per-case CSV](MUTE/reports/frozen_evaluation_v1.csv), [machine-readable results](MUTE/reports/frozen_evaluation_v1.json), and [audit record](MUTE/reports/frozen_evaluation_v1_audit.json).
 
-![All methods, seed 2027](reports/frozen_evaluation_v1_seed2027.png)
+![All methods, seed 2027](MUTE/reports/frozen_evaluation_v1_seed2027.png)
 
-![All methods, seed 4099](reports/frozen_evaluation_v1_seed4099.png)
+![All methods, seed 4099](MUTE/reports/frozen_evaluation_v1_seed4099.png)
 
 ## Reproducing the frozen screen
 
@@ -422,7 +589,7 @@ Exact reproduction depends on runtime/hardware behavior. If images differ under 
 
 **Keep v1's frozen files unchanged.** These cases have now been inspected and may be used for subsequent development. A changed method requires a new version and fresh frozen evaluation cases. Do not regenerate `freeze.json` merely to make modified code pass the v1 checks.
 
-The [frozen protocol guide](evaluation/frozen_v1/README.md) explains the replay contract. Ratings are stored in `runs/evaluation_v1/blinded_review/ratings.csv`; the method mapping is separate in `reports/frozen_review_mapping.json`.
+The [frozen protocol guide](MUTE/evaluation/frozen_v1/README.md) explains the replay contract. Ratings are stored in `runs/evaluation_v1/blinded_review/ratings.csv`; the method mapping is separate in `reports/frozen_review_mapping.json`.
 
 ## Validation and troubleshooting
 
@@ -476,14 +643,14 @@ No MUTE model weights have been trained. This record does not establish state-of
 
 | Record | Content |
 |---|---|
-| [Implementation plan](IMPLEMENTATION_PLAN.md) | Milestones and implementation checkpoints |
-| [Pretrained protocol](PRETRAINED_PROTOCOL_2026-10-04.md) / [results](RESEARCH_STATUS_2026-10-04_PRETRAINED.md) | Initial controlled pretrained checks |
-| [Schedule protocol](PROTOCOL_SCHEDULE_DEVELOPMENT_2026-10-04.md) / [results](RESEARCH_STATUS_2026-10-04_SCHEDULE.md) | Intervention schedule/penalty development |
-| [Restoration protocol](PROTOCOL_RESTORATION_DEVELOPMENT_2026-10-04.md) / [results](RESEARCH_STATUS_2026-10-04_RESTORATION.md) | Source restoration ablations |
-| [Coverage protocol](PROTOCOL_COVERAGE_DEVELOPMENT_2026-10-04.md) / [results](RESEARCH_STATUS_2026-10-04_COVERAGE.md) | Margin/feather experiments |
-| [Frozen protocol guide](evaluation/frozen_v1/README.md) | Freeze and reproduction rules |
-| [Source-mask review](evaluation/frozen_v1/SOURCE_MASK_REVIEW.md) | Limitations recorded before edited targets |
-| [Frozen results](reports/FROZEN_EVALUATION_V1.md) | Completed broader evaluation |
+| [Implementation plan](MUTE/IMPLEMENTATION_PLAN.md) | Milestones and implementation checkpoints |
+| [Pretrained protocol](MUTE/PRETRAINED_PROTOCOL_2026-10-04.md) / [results](MUTE/RESEARCH_STATUS_2026-10-04_PRETRAINED.md) | Initial controlled pretrained checks |
+| [Schedule protocol](MUTE/PROTOCOL_SCHEDULE_DEVELOPMENT_2026-10-04.md) / [results](MUTE/RESEARCH_STATUS_2026-10-04_SCHEDULE.md) | Intervention schedule/penalty development |
+| [Restoration protocol](MUTE/PROTOCOL_RESTORATION_DEVELOPMENT_2026-10-04.md) / [results](MUTE/RESEARCH_STATUS_2026-10-04_RESTORATION.md) | Source restoration ablations |
+| [Coverage protocol](MUTE/PROTOCOL_COVERAGE_DEVELOPMENT_2026-10-04.md) / [results](MUTE/RESEARCH_STATUS_2026-10-04_COVERAGE.md) | Margin/feather experiments |
+| [Frozen protocol guide](MUTE/evaluation/frozen_v1/README.md) | Freeze and reproduction rules |
+| [Source-mask review](MUTE/evaluation/frozen_v1/SOURCE_MASK_REVIEW.md) | Limitations recorded before edited targets |
+| [Frozen results](MUTE/reports/FROZEN_EVALUATION_V1.md) | Completed broader evaluation |
 
 Earlier `run_dynamic_*.py`, `run_soundproof_*.py`, `debug_*.py`, and `custom_attention.py` files remain historical experiments and debugging tools. Their short runs and saved images do not establish editing quality or preservation. Use `python -m mute.run` for the controlled pipeline.
 
