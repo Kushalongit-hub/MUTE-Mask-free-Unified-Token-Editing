@@ -1,0 +1,774 @@
+{
+  "scope": "Exploratory generated-image development checks",
+  "warning": "Inferred-mask background MAE does not establish edit success or independent preservation",
+  "runs": [
+    {
+      "directory": "runs\\apple_seed42_late_soft_v1",
+      "seed": 42,
+      "config": {
+        "model": "checkpoints\\pixart512",
+        "revision": null,
+        "variant": "fp16",
+        "verify_capture": true,
+        "local_files_only": true,
+        "source": "a red apple on a wooden table",
+        "target": "a green apple on a wooden table",
+        "phrase": "apple",
+        "seed": 42,
+        "steps": 30,
+        "capture_steps": [
+          5,
+          10,
+          15
+        ],
+        "layers": [
+          6,
+          12,
+          18,
+          24
+        ],
+        "threshold": 0.3,
+        "guidance": 4.5,
+        "intervention_start": 15,
+        "intervention_end": null,
+        "penalty": 2.0,
+        "intervention_layers": null,
+        "identity_controls": true,
+        "modes": [
+          "none",
+          "directional",
+          "symmetric",
+          "reverse"
+        ],
+        "device": "cuda",
+        "dtype": "bfloat16",
+        "offload": true,
+        "conditioning_cache": "runs\\apple_seed42_verified\\conditioning.safetensors",
+        "output": "runs\\apple_seed42_late_soft_v1"
+      },
+      "capture_verification": {
+        "pixels_equal": true,
+        "max_pixel_difference": 0,
+        "mean_pixel_difference": 0.0
+      },
+      "active_patches": 198,
+      "patches": 1024,
+      "modes": {
+        "none": {
+          "seconds": 5.818985599995358,
+          "sha256": "905b02f0dafb053509369a4b9e07365d786aca18ee0c7fc4e369640284d5413d",
+          "allocated_bytes": 1323585024,
+          "reserved_bytes": 1539309568,
+          "background_rgb_mae_diagnostic": 0.03845743894309136
+        },
+        "none_identity": {
+          "seconds": 5.733195499997237,
+          "sha256": "609f6c477121b3d98bb8c1a25f2f00d8423a013df1c3e1dfb480fa5293d6043c",
+          "allocated_bytes": 1323585024,
+          "reserved_bytes": 1539309568,
+          "background_rgb_mae_diagnostic": 0.0,
+          "whole_image_rgb_mae_diagnostic": 0.0
+        },
+        "directional": {
+          "seconds": 5.9544825999983,
+          "sha256": "a5a8a45f7ba20f44c63f3b26764a673272ea4ed953b7cb685135ff3211c247c6",
+          "allocated_bytes": 1323585024,
+          "reserved_bytes": 1539309568,
+          "background_rgb_mae_diagnostic": 0.03940177854333825
+        },
+        "directional_identity": {
+          "seconds": 6.210871099996439,
+          "sha256": "ca22e4e5de89b804cda1a5d1ec49c1962859de4caa1b3cd2c56ed4a7d3fb6733",
+          "allocated_bytes": 1323585024,
+          "reserved_bytes": 1539309568,
+          "background_rgb_mae_diagnostic": 0.014889322607574104,
+          "whole_image_rgb_mae_diagnostic": 0.01798063290664573
+        },
+        "symmetric": {
+          "seconds": 6.532422299998871,
+          "sha256": "47727361952e869b7094f5c64f605bb70f9f23ba3150ed6d0e1e1570af6a7ed3",
+          "allocated_bytes": 1323585024,
+          "reserved_bytes": 1541406720,
+          "background_rgb_mae_diagnostic": 0.03598413588599281
+        },
+        "symmetric_identity": {
+          "seconds": 6.383975400000054,
+          "sha256": "6c634bd02d4a6179d2ba37506b301094550613e9018e7de8ab5aa026deafabe5",
+          "allocated_bytes": 1323585024,
+          "reserved_bytes": 1541406720,
+          "background_rgb_mae_diagnostic": 0.025841646686923354,
+          "whole_image_rgb_mae_diagnostic": 0.02965781517278135
+        },
+        "reverse": {
+          "seconds": 6.2632864999977755,
+          "sha256": "2e1cd6ea30961391bacee125e285b0f448d7e04cc7133bcc14171e8baa0f2519",
+          "allocated_bytes": 1323585024,
+          "reserved_bytes": 1541406720,
+          "background_rgb_mae_diagnostic": 0.03624467000783364
+        },
+        "reverse_identity": {
+          "seconds": 6.195391600005678,
+          "sha256": "a2af352a747bd9fb09db687dc6ba086c180a141787ceaf0363dd3a2018ab973d",
+          "allocated_bytes": 1323585024,
+          "reserved_bytes": 1541406720,
+          "background_rgb_mae_diagnostic": 0.018312683477345743,
+          "whole_image_rgb_mae_diagnostic": 0.023283645530152164
+        }
+      }
+    },
+    {
+      "directory": "runs\\apple_seed42_hard_late_v1",
+      "seed": 42,
+      "config": {
+        "model": "checkpoints\\pixart512",
+        "revision": null,
+        "variant": "fp16",
+        "verify_capture": false,
+        "local_files_only": true,
+        "source": "a red apple on a wooden table",
+        "target": "a green apple on a wooden table",
+        "phrase": "apple",
+        "seed": 42,
+        "steps": 30,
+        "capture_steps": [
+          5,
+          10,
+          15
+        ],
+        "layers": [
+          6,
+          12,
+          18,
+          24
+        ],
+        "threshold": 0.3,
+        "guidance": 4.5,
+        "intervention_start": 15,
+        "intervention_end": null,
+        "penalty": "inf",
+        "intervention_layers": null,
+        "identity_controls": true,
+        "modes": [
+          "none",
+          "directional"
+        ],
+        "device": "cuda",
+        "dtype": "bfloat16",
+        "offload": true,
+        "conditioning_cache": "runs\\apple_seed42_verified\\conditioning.safetensors",
+        "output": "runs\\apple_seed42_hard_late_v1"
+      },
+      "capture_verification": null,
+      "active_patches": 198,
+      "patches": 1024,
+      "modes": {
+        "none": {
+          "seconds": 5.703240999995614,
+          "sha256": "905b02f0dafb053509369a4b9e07365d786aca18ee0c7fc4e369640284d5413d",
+          "allocated_bytes": 1323585024,
+          "reserved_bytes": 1539309568,
+          "background_rgb_mae_diagnostic": 0.03845743894309136
+        },
+        "none_identity": {
+          "seconds": 5.711558700000751,
+          "sha256": "609f6c477121b3d98bb8c1a25f2f00d8423a013df1c3e1dfb480fa5293d6043c",
+          "allocated_bytes": 1323585024,
+          "reserved_bytes": 1539309568,
+          "background_rgb_mae_diagnostic": 0.0,
+          "whole_image_rgb_mae_diagnostic": 0.0
+        },
+        "directional": {
+          "seconds": 6.096130900004937,
+          "sha256": "b0f7f9e7e1bf0a0f741e378f9bb41ad1b26a998c98d78be1c5f9d426306e4da1",
+          "allocated_bytes": 1323585024,
+          "reserved_bytes": 1539309568,
+          "background_rgb_mae_diagnostic": 0.0428163240931966
+        },
+        "directional_identity": {
+          "seconds": 5.932026999995287,
+          "sha256": "392d7d1fa3750e17277c39034ede1f30df98f047cf90145815c6f2762beefb10",
+          "allocated_bytes": 1323585024,
+          "reserved_bytes": 1539309568,
+          "background_rgb_mae_diagnostic": 0.02518892973856209,
+          "whole_image_rgb_mae_diagnostic": 0.03217287749246834
+        }
+      }
+    },
+    {
+      "directory": "runs\\apple_seed42_soft_full_v1",
+      "seed": 42,
+      "config": {
+        "model": "checkpoints\\pixart512",
+        "revision": null,
+        "variant": "fp16",
+        "verify_capture": false,
+        "local_files_only": true,
+        "source": "a red apple on a wooden table",
+        "target": "a green apple on a wooden table",
+        "phrase": "apple",
+        "seed": 42,
+        "steps": 30,
+        "capture_steps": [
+          5,
+          10,
+          15
+        ],
+        "layers": [
+          6,
+          12,
+          18,
+          24
+        ],
+        "threshold": 0.3,
+        "guidance": 4.5,
+        "intervention_start": 0,
+        "intervention_end": null,
+        "penalty": 2.0,
+        "intervention_layers": null,
+        "identity_controls": true,
+        "modes": [
+          "none",
+          "directional"
+        ],
+        "device": "cuda",
+        "dtype": "bfloat16",
+        "offload": true,
+        "conditioning_cache": "runs\\apple_seed42_verified\\conditioning.safetensors",
+        "output": "runs\\apple_seed42_soft_full_v1"
+      },
+      "capture_verification": null,
+      "active_patches": 198,
+      "patches": 1024,
+      "modes": {
+        "none": {
+          "seconds": 5.660700100001122,
+          "sha256": "905b02f0dafb053509369a4b9e07365d786aca18ee0c7fc4e369640284d5413d",
+          "allocated_bytes": 1323585024,
+          "reserved_bytes": 1539309568,
+          "background_rgb_mae_diagnostic": 0.03845743894309136
+        },
+        "none_identity": {
+          "seconds": 5.656595899999957,
+          "sha256": "609f6c477121b3d98bb8c1a25f2f00d8423a013df1c3e1dfb480fa5293d6043c",
+          "allocated_bytes": 1323585024,
+          "reserved_bytes": 1539309568,
+          "background_rgb_mae_diagnostic": 0.0,
+          "whole_image_rgb_mae_diagnostic": 0.0
+        },
+        "directional": {
+          "seconds": 6.331053699999757,
+          "sha256": "d381be57ce669899097b45bfbb2f10b7db7fa3d88b80284c89e4659a0027a87e",
+          "allocated_bytes": 1323585024,
+          "reserved_bytes": 1539309568,
+          "background_rgb_mae_diagnostic": 0.09732655950798398
+        },
+        "directional_identity": {
+          "seconds": 7.218978999997489,
+          "sha256": "3a8799b20394a4dffaf5bf4e552393c8b3adb92f8660dde2a65cafd6ce799ad7",
+          "allocated_bytes": 1323585024,
+          "reserved_bytes": 1539309568,
+          "background_rgb_mae_diagnostic": 0.08072729974758265,
+          "whole_image_rgb_mae_diagnostic": 0.10677745046179278
+        }
+      }
+    },
+    {
+      "directory": "runs\\apple_seed42_guidance75_v1",
+      "seed": 42,
+      "config": {
+        "model": "checkpoints\\pixart512",
+        "revision": null,
+        "variant": "fp16",
+        "verify_capture": false,
+        "local_files_only": true,
+        "source": "a red apple on a wooden table",
+        "target": "a green apple on a wooden table",
+        "phrase": "apple",
+        "seed": 42,
+        "steps": 30,
+        "capture_steps": [
+          5,
+          10,
+          15
+        ],
+        "layers": [
+          6,
+          12,
+          18,
+          24
+        ],
+        "threshold": 0.3,
+        "guidance": 7.5,
+        "intervention_start": 0,
+        "intervention_end": null,
+        "penalty": "inf",
+        "intervention_layers": null,
+        "identity_controls": false,
+        "modes": [
+          "none"
+        ],
+        "device": "cuda",
+        "dtype": "bfloat16",
+        "offload": true,
+        "conditioning_cache": "runs\\apple_seed42_verified\\conditioning.safetensors",
+        "output": "runs\\apple_seed42_guidance75_v1"
+      },
+      "capture_verification": null,
+      "active_patches": 185,
+      "patches": 1024,
+      "modes": {
+        "none": {
+          "seconds": 6.385384400004114,
+          "sha256": "423d732e083864ad4775a81a6321645d32eb5fa74b86491917dc600e3cc2c9b9",
+          "allocated_bytes": 1323585024,
+          "reserved_bytes": 1539309568,
+          "background_rgb_mae_diagnostic": 0.04344569062726402
+        }
+      }
+    },
+    {
+      "directory": "runs\\apple_seed42_guidance10_v1",
+      "seed": 42,
+      "config": {
+        "model": "checkpoints\\pixart512",
+        "revision": null,
+        "variant": "fp16",
+        "verify_capture": false,
+        "local_files_only": true,
+        "source": "a red apple on a wooden table",
+        "target": "a green apple on a wooden table",
+        "phrase": "apple",
+        "seed": 42,
+        "steps": 30,
+        "capture_steps": [
+          5,
+          10,
+          15
+        ],
+        "layers": [
+          6,
+          12,
+          18,
+          24
+        ],
+        "threshold": 0.3,
+        "guidance": 10.0,
+        "intervention_start": 0,
+        "intervention_end": null,
+        "penalty": "inf",
+        "intervention_layers": null,
+        "identity_controls": false,
+        "modes": [
+          "none"
+        ],
+        "device": "cuda",
+        "dtype": "bfloat16",
+        "offload": true,
+        "conditioning_cache": "runs\\apple_seed42_verified\\conditioning.safetensors",
+        "output": "runs\\apple_seed42_guidance10_v1"
+      },
+      "capture_verification": null,
+      "active_patches": 175,
+      "patches": 1024,
+      "modes": {
+        "none": {
+          "seconds": 6.069630199999665,
+          "sha256": "35a70eada4fde268cadb78e98ab613a2587f7e61f297f27f3f5effc9c87480bb",
+          "allocated_bytes": 1323585024,
+          "reserved_bytes": 1539309568,
+          "background_rgb_mae_diagnostic": 0.06510590482266719
+        }
+      }
+    },
+    {
+      "directory": "runs\\apple_explicit_seed42_late_soft_v1",
+      "seed": 42,
+      "config": {
+        "model": "checkpoints\\pixart512",
+        "revision": null,
+        "variant": "fp16",
+        "verify_capture": false,
+        "local_files_only": true,
+        "source": "a red apple on a wooden table",
+        "target": "a bright green apple with completely green skin on a wooden table",
+        "phrase": "apple",
+        "seed": 42,
+        "steps": 30,
+        "capture_steps": [
+          5,
+          10,
+          15
+        ],
+        "layers": [
+          6,
+          12,
+          18,
+          24
+        ],
+        "threshold": 0.3,
+        "guidance": 4.5,
+        "intervention_start": 15,
+        "intervention_end": null,
+        "penalty": 2.0,
+        "intervention_layers": null,
+        "identity_controls": true,
+        "modes": [
+          "none",
+          "directional"
+        ],
+        "device": "cuda",
+        "dtype": "bfloat16",
+        "offload": true,
+        "conditioning_cache": "runs\\development_bank_v1\\apple_explicit.safetensors",
+        "output": "runs\\apple_explicit_seed42_late_soft_v1"
+      },
+      "capture_verification": null,
+      "active_patches": 198,
+      "patches": 1024,
+      "modes": {
+        "none": {
+          "seconds": 5.747823799996695,
+          "sha256": "0444b947a2c769e9605a638aac989a701d4e11aa6ec3613fc40de94626b84189",
+          "allocated_bytes": 1323585024,
+          "reserved_bytes": 1539309568,
+          "background_rgb_mae_diagnostic": 0.17754260779170425
+        },
+        "none_identity": {
+          "seconds": 5.680972499998461,
+          "sha256": "609f6c477121b3d98bb8c1a25f2f00d8423a013df1c3e1dfb480fa5293d6043c",
+          "allocated_bytes": 1323585024,
+          "reserved_bytes": 1539309568,
+          "background_rgb_mae_diagnostic": 0.0,
+          "whole_image_rgb_mae_diagnostic": 0.0
+        },
+        "directional": {
+          "seconds": 6.541194400000677,
+          "sha256": "19189ad3bae2d155ec44ec81738d7ddb188a2fdf7d5b82b1b0feece711186115",
+          "allocated_bytes": 1323585024,
+          "reserved_bytes": 1539309568,
+          "background_rgb_mae_diagnostic": 0.17889948087285762
+        },
+        "directional_identity": {
+          "seconds": 6.638675600006536,
+          "sha256": "ca22e4e5de89b804cda1a5d1ec49c1962859de4caa1b3cd2c56ed4a7d3fb6733",
+          "allocated_bytes": 1323585024,
+          "reserved_bytes": 1539309568,
+          "background_rgb_mae_diagnostic": 0.014889322607574104,
+          "whole_image_rgb_mae_diagnostic": 0.01798063290664573
+        }
+      }
+    },
+    {
+      "directory": "runs\\mug_seed42_late_soft_v1",
+      "seed": 42,
+      "config": {
+        "model": "checkpoints\\pixart512",
+        "revision": null,
+        "variant": "fp16",
+        "verify_capture": false,
+        "local_files_only": true,
+        "source": "a red ceramic mug on a wooden table",
+        "target": "a blue ceramic mug on a wooden table",
+        "phrase": "mug",
+        "seed": 42,
+        "steps": 30,
+        "capture_steps": [
+          5,
+          10,
+          15
+        ],
+        "layers": [
+          6,
+          12,
+          18,
+          24
+        ],
+        "threshold": 0.3,
+        "guidance": 4.5,
+        "intervention_start": 15,
+        "intervention_end": null,
+        "penalty": 2.0,
+        "intervention_layers": null,
+        "identity_controls": true,
+        "modes": [
+          "none",
+          "directional"
+        ],
+        "device": "cuda",
+        "dtype": "bfloat16",
+        "offload": true,
+        "conditioning_cache": "runs\\development_bank_v1\\mug.safetensors",
+        "output": "runs\\mug_seed42_late_soft_v1"
+      },
+      "capture_verification": null,
+      "active_patches": 218,
+      "patches": 1024,
+      "modes": {
+        "none": {
+          "seconds": 6.183688600001915,
+          "sha256": "74159f7f50e2f17726e67c5e23850193f5f9c06e54f5fe9ff3e791188e3f2f3e",
+          "allocated_bytes": 1323585024,
+          "reserved_bytes": 1539309568,
+          "background_rgb_mae_diagnostic": 0.13162791649434796
+        },
+        "none_identity": {
+          "seconds": 6.0688198000061675,
+          "sha256": "9fdeb75956ff6d0f61b9d4bb97320407ada485a677709c1fc0f33cf7ae5865c7",
+          "allocated_bytes": 1323585024,
+          "reserved_bytes": 1539309568,
+          "background_rgb_mae_diagnostic": 0.0,
+          "whole_image_rgb_mae_diagnostic": 0.0
+        },
+        "directional": {
+          "seconds": 6.505359099995985,
+          "sha256": "75c02de326432ff2e7988ef9db4d5b8d7a98ed2574ec234b1ca29f477b586f10",
+          "allocated_bytes": 1323585024,
+          "reserved_bytes": 1539309568,
+          "background_rgb_mae_diagnostic": 0.12627855422566048
+        },
+        "directional_identity": {
+          "seconds": 6.360597399994731,
+          "sha256": "af184f972a0b0e4f707789e20ffc9d42b345b24981b8b519933019422354cc83",
+          "allocated_bytes": 1323585024,
+          "reserved_bytes": 1539309568,
+          "background_rgb_mae_diagnostic": 0.02096729213294085,
+          "whole_image_rgb_mae_diagnostic": 0.02155980128867953
+        }
+      }
+    },
+    {
+      "directory": "runs\\cube_seed42_late_soft_v1",
+      "seed": 42,
+      "config": {
+        "model": "checkpoints\\pixart512",
+        "revision": null,
+        "variant": "fp16",
+        "verify_capture": false,
+        "local_files_only": true,
+        "source": "a red cube on a wooden table",
+        "target": "a blue cube on a wooden table",
+        "phrase": "cube",
+        "seed": 42,
+        "steps": 30,
+        "capture_steps": [
+          5,
+          10,
+          15
+        ],
+        "layers": [
+          6,
+          12,
+          18,
+          24
+        ],
+        "threshold": 0.3,
+        "guidance": 4.5,
+        "intervention_start": 15,
+        "intervention_end": null,
+        "penalty": 2.0,
+        "intervention_layers": null,
+        "identity_controls": true,
+        "modes": [
+          "none",
+          "directional"
+        ],
+        "device": "cuda",
+        "dtype": "bfloat16",
+        "offload": true,
+        "conditioning_cache": "runs\\development_bank_v1\\cube.safetensors",
+        "output": "runs\\cube_seed42_late_soft_v1"
+      },
+      "capture_verification": null,
+      "active_patches": 181,
+      "patches": 1024,
+      "modes": {
+        "none": {
+          "seconds": 5.766971500001091,
+          "sha256": "c801da30217fffbbc356248e0ca48685b48cb61398537338a7530e41bf82b3f7",
+          "allocated_bytes": 1323585024,
+          "reserved_bytes": 1539309568,
+          "background_rgb_mae_diagnostic": 0.22337575908675053
+        },
+        "none_identity": {
+          "seconds": 7.04517130000022,
+          "sha256": "fc870ccb46f4c22c155242575cf5b8d8f538605cae261bb4cf8ae3ed01936038",
+          "allocated_bytes": 1323585024,
+          "reserved_bytes": 1539309568,
+          "background_rgb_mae_diagnostic": 0.0,
+          "whole_image_rgb_mae_diagnostic": 0.0
+        },
+        "directional": {
+          "seconds": 6.878386899996258,
+          "sha256": "8b5ca7c2934a90d693bf812cc794a05bc38b1203d4f91a00a1470036b79b41d5",
+          "allocated_bytes": 1323585024,
+          "reserved_bytes": 1539309568,
+          "background_rgb_mae_diagnostic": 0.22284004324347376
+        },
+        "directional_identity": {
+          "seconds": 6.583308000001125,
+          "sha256": "29e870586c0e4703698b842c572b2683a4141a4f9f7d42fa512fed3a32bcaed8",
+          "allocated_bytes": 1323585024,
+          "reserved_bytes": 1539309568,
+          "background_rgb_mae_diagnostic": 0.01599661451670427,
+          "whole_image_rgb_mae_diagnostic": 0.016078943988077004
+        }
+      }
+    },
+    {
+      "directory": "runs\\apple_seed17_late_soft_v1",
+      "seed": 17,
+      "config": {
+        "model": "checkpoints\\pixart512",
+        "revision": null,
+        "variant": "fp16",
+        "verify_capture": false,
+        "local_files_only": true,
+        "source": "a red apple on a wooden table",
+        "target": "a green apple on a wooden table",
+        "phrase": "apple",
+        "seed": 17,
+        "steps": 30,
+        "capture_steps": [
+          5,
+          10,
+          15
+        ],
+        "layers": [
+          6,
+          12,
+          18,
+          24
+        ],
+        "threshold": 0.3,
+        "guidance": 4.5,
+        "intervention_start": 15,
+        "intervention_end": null,
+        "penalty": 2.0,
+        "intervention_layers": null,
+        "identity_controls": true,
+        "modes": [
+          "none",
+          "directional"
+        ],
+        "device": "cuda",
+        "dtype": "bfloat16",
+        "offload": true,
+        "conditioning_cache": "runs\\apple_seed42_verified\\conditioning.safetensors",
+        "output": "runs\\apple_seed17_late_soft_v1"
+      },
+      "capture_verification": null,
+      "active_patches": 220,
+      "patches": 1024,
+      "modes": {
+        "none": {
+          "seconds": 6.175968299998203,
+          "sha256": "05e27eb14487b8975e86fa54b4958885bb89b0c163ef48c5d7a200e0cad79cbb",
+          "allocated_bytes": 1323585024,
+          "reserved_bytes": 1539309568,
+          "background_rgb_mae_diagnostic": 0.06222608109371443
+        },
+        "none_identity": {
+          "seconds": 6.03926710000087,
+          "sha256": "cb422d1df277c0738f8913c1d5677eeb13c6d60164a6b9aca9076f73f0d8d9ac",
+          "allocated_bytes": 1323585024,
+          "reserved_bytes": 1539309568,
+          "background_rgb_mae_diagnostic": 0.0,
+          "whole_image_rgb_mae_diagnostic": 0.0
+        },
+        "directional": {
+          "seconds": 6.8672231000018655,
+          "sha256": "100ce3c1f0f3583614e5e9d55c3c69137e22145316a5c65935f79c236230f33a",
+          "allocated_bytes": 1323585024,
+          "reserved_bytes": 1539309568,
+          "background_rgb_mae_diagnostic": 0.06535388188753943
+        },
+        "directional_identity": {
+          "seconds": 6.4139586000019335,
+          "sha256": "aa8f0a915b81fc0d37b47b7940715ca5f9dfcded9af58604f050a4aaa5df26ff",
+          "allocated_bytes": 1323585024,
+          "reserved_bytes": 1539309568,
+          "background_rgb_mae_diagnostic": 0.023629922792085326,
+          "whole_image_rgb_mae_diagnostic": 0.024749217313878673
+        }
+      }
+    },
+    {
+      "directory": "runs\\apple_seed123_late_soft_v1",
+      "seed": 123,
+      "config": {
+        "model": "checkpoints\\pixart512",
+        "revision": null,
+        "variant": "fp16",
+        "verify_capture": false,
+        "local_files_only": true,
+        "source": "a red apple on a wooden table",
+        "target": "a green apple on a wooden table",
+        "phrase": "apple",
+        "seed": 123,
+        "steps": 30,
+        "capture_steps": [
+          5,
+          10,
+          15
+        ],
+        "layers": [
+          6,
+          12,
+          18,
+          24
+        ],
+        "threshold": 0.3,
+        "guidance": 4.5,
+        "intervention_start": 15,
+        "intervention_end": null,
+        "penalty": 2.0,
+        "intervention_layers": null,
+        "identity_controls": true,
+        "modes": [
+          "none",
+          "directional"
+        ],
+        "device": "cuda",
+        "dtype": "bfloat16",
+        "offload": true,
+        "conditioning_cache": "runs\\apple_seed42_verified\\conditioning.safetensors",
+        "output": "runs\\apple_seed123_late_soft_v1"
+      },
+      "capture_verification": null,
+      "active_patches": 151,
+      "patches": 1024,
+      "modes": {
+        "none": {
+          "seconds": 6.155118000002403,
+          "sha256": "0f2fc2ff498c46e48e043faa40d0cf43c2b5f41ddd69980a5a6cf3ca5f8c80f3",
+          "allocated_bytes": 1323585024,
+          "reserved_bytes": 1539309568,
+          "background_rgb_mae_diagnostic": 0.03062063778833412
+        },
+        "none_identity": {
+          "seconds": 6.250511400001415,
+          "sha256": "5781fc4a71c7bb380000d89e3d68f93910d38ba9a18cf3228c7dac33611b9218",
+          "allocated_bytes": 1323585024,
+          "reserved_bytes": 1539309568,
+          "background_rgb_mae_diagnostic": 0.0,
+          "whole_image_rgb_mae_diagnostic": 0.0
+        },
+        "directional": {
+          "seconds": 7.130522200000996,
+          "sha256": "16b141ce26b970faa2523ceb4811355a4bf5110369489a9447b6bff354e29cf0",
+          "allocated_bytes": 1323585024,
+          "reserved_bytes": 1539309568,
+          "background_rgb_mae_diagnostic": 0.03833932508665933
+        },
+        "directional_identity": {
+          "seconds": 6.295770299999276,
+          "sha256": "2a69978855906ebeb425b0d1e07f2b5e295d2ffec2475526d562d3fd589ee5ee",
+          "allocated_bytes": 1323585024,
+          "reserved_bytes": 1539309568,
+          "background_rgb_mae_diagnostic": 0.020985841119571153,
+          "whole_image_rgb_mae_diagnostic": 0.02102655148973652
+        }
+      }
+    }
+  ]
+}

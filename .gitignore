@@ -19,3 +19,5 @@ MUTE/*.png
 MUTE/inference_log.txt
 MUTE/.vscode/
 MUTE/.idea/
+MUTE/runs/
+MUTE/checkpoints/

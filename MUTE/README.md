@@ -1,5 +1,49 @@
 # MUTE - Mask-free Unified Token Editing
 
+## New controlled implementation (4 October 2026)
+
+Start with [IMPLEMENTATION_PLAN.md](IMPLEMENTATION_PLAN.md). The new `mute/`
+package provides a configurable source-to-target prompt experiment, corrected
+attention capture, and ordinary/directional/symmetric/reverse ablations. Run
+`..\.venv\Scripts\python.exe -m mute.run --help` from this directory.
+The scripts described below are legacy prototypes. Their results do not establish
+editing quality, background preservation, or novelty.
+
+Pretrained checks are now complete on three development seeds; all pass exact
+capture equivalence. The current hard attention masks damage the images and do
+not establish an editing benefit. See
+[the measured checkpoint](RESEARCH_STATUS_2026-10-04_PRETRAINED.md) and
+[the experiment protocol](PRETRAINED_PROTOCOL_2026-10-04.md).
+
+The second development phase adds intervention intervals, finite attention
+penalties, and unchanged-prompt controls. Explicit apple wording and red-to-blue
+mug/cube prompts establish visible semantic baselines. Late soft intervention
+reduces artifacts, but preservation superiority is still unproven. See
+[the schedule results](RESEARCH_STATUS_2026-10-04_SCHEDULE.md).
+
+Example (from this directory, after downloading weights):
+
+```powershell
+..\.venv\Scripts\python.exe -m mute.run --model checkpoints\pixart512 --local-files-only --offload --output runs\my_late_soft_run --intervention-start 15 --penalty 2 --identity-controls
+```
+
+`--intervention-start` and `--intervention-end` count zero-based denoising calls;
+the end is exclusive. Finite penalties subtract from blocked attention logits.
+Unchanged-prompt controls quantify disturbance caused by the intervention itself.
+
+Source-trajectory restoration is now available through `--restore-background`.
+It adds restoration-only and combined variants with separately saved source
+latents. Initial results preserve the background much better, while incomplete
+object coverage and boundary artifacts remain. See
+[the restoration checkpoint](RESEARCH_STATUS_2026-10-04_RESTORATION.md) and
+[its protocol](PROTOCOL_RESTORATION_DEVELOPMENT_2026-10-04.md).
+
+Coverage development adds `--mask-margin 2` (a 32-pixel editable-core radius) and
+optional `--mask-feather 1` for restoration. These fix visible mug handle remnants
+in development examples, with increased background drift and geometry changes.
+The original evaluation mask stays fixed. See
+[the coverage checkpoint](RESEARCH_STATUS_2026-10-04_COVERAGE.md).
+
 Research codebase for mask-free unified token editing in text-to-image diffusion models, built on **PixArt-XL-2-512x512**.
 
 ## What this repo contains

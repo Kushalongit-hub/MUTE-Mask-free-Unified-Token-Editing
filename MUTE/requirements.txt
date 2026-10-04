@@ -1,0 +1,6 @@
+# Model-library versions; use requirements_cuda_windows.txt for the Windows GPU build.
+diffusers==0.40.0
+transformers==5.18.0
+accelerate==1.15.0
+sentencepiece==0.2.2
+protobuf==6.33.6

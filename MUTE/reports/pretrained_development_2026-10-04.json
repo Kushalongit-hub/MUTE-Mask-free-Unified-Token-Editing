@@ -1,0 +1,129 @@
+{
+  "scope": "Exploratory generated-image development checks",
+  "warning": "Inferred-mask background MAE does not establish edit success or independent preservation",
+  "runs": [
+    {
+      "directory": "runs\\apple_seed42_verified_v2",
+      "seed": 42,
+      "capture_verification": {
+        "pixels_equal": true,
+        "max_pixel_difference": 0,
+        "mean_pixel_difference": 0.0
+      },
+      "active_patches": 198,
+      "patches": 1024,
+      "modes": {
+        "none": {
+          "seconds": 7.136267599998973,
+          "sha256": "905b02f0dafb053509369a4b9e07365d786aca18ee0c7fc4e369640284d5413d",
+          "allocated_bytes": 1323585024,
+          "reserved_bytes": 1539309568,
+          "background_rgb_mae_diagnostic": 0.03845743894309136
+        },
+        "directional": {
+          "seconds": 8.11653419999493,
+          "sha256": "190eb1d735d00724e90c00820e0399c9d7303dcd82d8949dc3c6059a0d096ef2",
+          "allocated_bytes": 1323585024,
+          "reserved_bytes": 1539309568,
+          "background_rgb_mae_diagnostic": 0.102262260836538
+        },
+        "symmetric": {
+          "seconds": 8.617994699998235,
+          "sha256": "b3a6f80875f514b212f55e7f8d4f239f2c2f124ddc5bf61619498245391d4bbe",
+          "allocated_bytes": 1323585024,
+          "reserved_bytes": 1541406720,
+          "background_rgb_mae_diagnostic": 0.1016911937797718
+        },
+        "reverse": {
+          "seconds": 9.010861299997487,
+          "sha256": "e3f57e454f6fa6a405b31a6251eea309818104fb004eb0a6139bec62e0d1980f",
+          "allocated_bytes": 1323585024,
+          "reserved_bytes": 1539309568,
+          "background_rgb_mae_diagnostic": 0.14192802915657787
+        }
+      }
+    },
+    {
+      "directory": "runs\\apple_seed17_verified",
+      "seed": 17,
+      "capture_verification": {
+        "pixels_equal": true,
+        "max_pixel_difference": 0,
+        "mean_pixel_difference": 0.0
+      },
+      "active_patches": 220,
+      "patches": 1024,
+      "modes": {
+        "none": {
+          "seconds": 6.411421299999347,
+          "sha256": "05e27eb14487b8975e86fa54b4958885bb89b0c163ef48c5d7a200e0cad79cbb",
+          "allocated_bytes": 1323585024,
+          "reserved_bytes": 1539309568,
+          "background_rgb_mae_diagnostic": 0.06222608109371443
+        },
+        "directional": {
+          "seconds": 6.950163699999393,
+          "sha256": "f1920592023fc3d0ea62a247e1ebc42c328184d8784b444baca65f407cc39fad",
+          "allocated_bytes": 1323585024,
+          "reserved_bytes": 1539309568,
+          "background_rgb_mae_diagnostic": 0.12434094336324912
+        },
+        "symmetric": {
+          "seconds": 6.746770000005199,
+          "sha256": "1858d33ceacf76fc9d2f0d2ebb28e8a672e91430054970a4f0e6ea32b44f569e",
+          "allocated_bytes": 1323585024,
+          "reserved_bytes": 1541406720,
+          "background_rgb_mae_diagnostic": 0.12310021075179657
+        },
+        "reverse": {
+          "seconds": 6.752629200003867,
+          "sha256": "aedab9e5fcaf4d0a52d28402172c6e9544aa0cd4d5dd3424e6ecbbfa0c4de1b6",
+          "allocated_bytes": 1323585024,
+          "reserved_bytes": 1539309568,
+          "background_rgb_mae_diagnostic": 0.12232253001739668
+        }
+      }
+    },
+    {
+      "directory": "runs\\apple_seed123_verified",
+      "seed": 123,
+      "capture_verification": {
+        "pixels_equal": true,
+        "max_pixel_difference": 0,
+        "mean_pixel_difference": 0.0
+      },
+      "active_patches": 151,
+      "patches": 1024,
+      "modes": {
+        "none": {
+          "seconds": 5.957612400001381,
+          "sha256": "0f2fc2ff498c46e48e043faa40d0cf43c2b5f41ddd69980a5a6cf3ca5f8c80f3",
+          "allocated_bytes": 1323585024,
+          "reserved_bytes": 1539309568,
+          "background_rgb_mae_diagnostic": 0.03062063778833412
+        },
+        "directional": {
+          "seconds": 6.663213900006667,
+          "sha256": "80d049a46e4a6d1f636e7eee5869e5805f1bfed1041d696eca5718ac0289a85d",
+          "allocated_bytes": 1323585024,
+          "reserved_bytes": 1539309568,
+          "background_rgb_mae_diagnostic": 0.06472460511982571
+        },
+        "symmetric": {
+          "seconds": 6.939553700001852,
+          "sha256": "78c3632a56500ec014dd88ad9b83a55f618634a0e1a2fd8648ed6cb03cce24b6",
+          "allocated_bytes": 1323585024,
+          "reserved_bytes": 1541406720,
+          "background_rgb_mae_diagnostic": 0.06511723926397592
+        },
+        "reverse": {
+          "seconds": 6.869557699996221,
+          "sha256": "56553b5f5f8fafe6c52140144545ab31a5c150f7f49e8badcaa19c743208b54c",
+          "allocated_bytes": 1323585024,
+          "reserved_bytes": 1539309568,
+          "background_rgb_mae_diagnostic": 0.09235534980983612
+        }
+      }
+    }
+  ]
+}
